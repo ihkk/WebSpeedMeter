@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css'
+import "./App.css";
 
 interface LocationState {
   latitude: number | null;
@@ -9,8 +9,8 @@ interface LocationState {
   altitude: number | null;
   speed: number | null;
   heading: number | null;
+  timestamp: string | null;
 }
-
 
 const App: React.FC = () => {
   const [location, setLocation] = useState<LocationState>({
@@ -20,9 +20,11 @@ const App: React.FC = () => {
     altitude: null,
     speed: null,
     heading: null,
+    timestamp: null,
   });
 
   const [error, setError] = useState<string | null>(null);
+  const [altitudeBaseline, setAltitudeBaseline] = useState<number | null>(null);
 
   useEffect(() => {
     let watchId: number;
@@ -32,13 +34,28 @@ const App: React.FC = () => {
         watchId = navigator.geolocation.watchPosition(
           (position) => {
             console.log(position);
+
+            const readableTimestamp = new Date(position.timestamp).toLocaleString();
+            const currentAltitude = position.coords.altitude;
+
+            if (altitudeBaseline === null && currentAltitude !== null && currentAltitude < 0) {
+              setAltitudeBaseline(-currentAltitude);
+            }
+
+            // calibrate altitude
+            const calibratedAltitude =
+              currentAltitude !== null && altitudeBaseline !== null
+                ? currentAltitude + altitudeBaseline
+                : currentAltitude;
+
             setLocation({
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
               accuracy: position.coords.accuracy,
-              altitude: position.coords.altitude,
+              altitude: calibratedAltitude,
               speed: position.coords.speed,
               heading: position.coords.heading,
+              timestamp: readableTimestamp, // 设置时间戳
             });
             setError(null);
           },
@@ -51,6 +68,7 @@ const App: React.FC = () => {
               altitude: null,
               speed: null,
               heading: null,
+              timestamp: null,
             });
           },
           {
@@ -87,15 +105,14 @@ const App: React.FC = () => {
               <strong>Accuracy:</strong> {location.accuracy ? `${location.accuracy} meters` : "N/A"} <br />
               <strong>Altitude:</strong> {location.altitude ? `${location.altitude} meters` : "N/A"} <br />
               <strong>Speed:</strong> {location.speed ? `${location.speed} m/s` : "N/A"} <br />
-              <strong>Heading:</strong> {location.heading ? `${location.heading}°` : "N/A"}
+              <strong>Heading:</strong> {location.heading ? `${location.heading}°` : "N/A"} <br />
+              <strong>Timestamp:</strong> {location.timestamp ?? "N/A"}
             </p>
           </div>
         </div>
       )}
     </div>
   );
-
-
 };
 
 export default App;
