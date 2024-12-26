@@ -7,7 +7,6 @@ interface LocationState {
   longitude: number | null;
   accuracy: number | null;
   altitude: number | null;
-  altitudeAccuracy: number | null;
   speed: number | null;
   heading: number | null;
 }
@@ -19,7 +18,6 @@ const App: React.FC = () => {
     longitude: null,
     accuracy: null,
     altitude: null,
-    altitudeAccuracy: null,
     speed: null,
     heading: null,
   });
@@ -38,7 +36,6 @@ const App: React.FC = () => {
               longitude: position.coords.longitude,
               accuracy: position.coords.accuracy,
               altitude: position.coords.altitude,
-              altitudeAccuracy: position.coords.altitudeAccuracy,
               speed: position.coords.speed,
               heading: position.coords.heading,
             });
@@ -51,7 +48,6 @@ const App: React.FC = () => {
               longitude: null,
               accuracy: null,
               altitude: null,
-              altitudeAccuracy: null,
               speed: null,
               heading: null,
             });
@@ -89,7 +85,6 @@ const App: React.FC = () => {
               <strong>Longitude:</strong> {location.longitude ?? "N/A"} <br />
               <strong>Accuracy:</strong> {location.accuracy ? `${location.accuracy} meters` : "N/A"} <br />
               <strong>Altitude:</strong> {location.altitude ? `${location.altitude} meters` : "N/A"} <br />
-              <strong>Altitude Accuracy:</strong> {location.altitudeAccuracy ? `${location.altitudeAccuracy} meters` : "N/A"} <br />
               <strong>Speed:</strong> {location.speed ? `${location.speed} m/s` : "N/A"} <br />
               <strong>Heading:</strong> {location.heading ? `${location.heading}°` : "N/A"}
             </p>
