@@ -102,7 +102,7 @@ const App: React.FC = () => {
           </div>
           {/* 显示速度的 NumberDisplay */}
           <div className="d-flex justify-content-center my-4">
-            <NumberDisplay value={location.speed !== null ? (location.speed * 3.6).toFixed(2) : 0} unit="KM/H" />
+            <NumberDisplay value={location.speed !== null ? (location.speed * 3.6).toFixed(0) : 0} unit="KM/H" />
           </div>
 
           {/* 显示指南针 */}
