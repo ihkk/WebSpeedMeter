@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Compass from "./Compass";
 
 interface LocationState {
   latitude: number | null;
@@ -76,28 +77,34 @@ const App: React.FC = () => {
     };
   }, []);
 
+
+
   return (
     <div className="container mt-5">
       <h1 className="mb-4">Web Speed Meter</h1>
       {error ? (
         <div className="alert alert-danger">{error}</div>
       ) : (
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Coordinates</h5>
-            <p className="card-text">
-              <strong>Latitude:</strong> {location.latitude ?? "N/A"} <br />
-              <strong>Longitude:</strong> {location.longitude ?? "N/A"} <br />
-              <strong>Accuracy:</strong> {location.accuracy ? `${location.accuracy} meters` : "N/A"} <br />
-              <strong>Altitude:</strong> {location.altitude ? `${location.altitude} meters` : "N/A"} <br />
-              <strong>Speed:</strong> {location.speed ? `${location.speed} m/s` : "N/A"} <br />
-              <strong>Heading:</strong> {location.heading ? `${location.heading}°` : "N/A"} <br />
-              <strong>Timestamp:</strong> {location.timestamp ?? "N/A"}
-            </p>
+        <>
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Coordinates</h5>
+              <p className="card-text">
+                <strong>Latitude:</strong> {location.latitude ?? "N/A"} <br />
+                <strong>Longitude:</strong> {location.longitude ?? "N/A"} <br />
+                <strong>Accuracy:</strong> {location.accuracy ? `${location.accuracy.toFixed(0)} m` : "N/A"} <br />
+                <strong>Altitude:</strong> {location.altitude !== null ? `${location.altitude.toFixed(2)} m` : "N/A"} <br />
+                <strong>Speed:</strong> {location.speed !== null ? `${location.speed.toFixed(2)} m/s` : "N/A"} <br />
+                <strong>Heading:</strong> {location.heading ? `${location.heading.toFixed(2)}°` : "N/A"} <br />
+                <strong>Timestamp:</strong> {location.timestamp ?? "N/A"}
+              </p>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+          <Compass heading={location.heading ?? 0} />
+        </>
+      )
+      }
+    </div >
   );
 };
 
