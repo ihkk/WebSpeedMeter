@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Compass from "./Compass";
+import NumberDisplay from "./NumberDisplay";
 
 interface LocationState {
   latitude: number | null;
@@ -99,6 +100,12 @@ const App: React.FC = () => {
               </p>
             </div>
           </div>
+          {/* 显示速度的 NumberDisplay */}
+          <div className="d-flex justify-content-center my-4">
+            <NumberDisplay value={location.speed !== null ? (location.speed * 3.6).toFixed(2) : 0} unit="KM/H" />
+          </div>
+
+          {/* 显示指南针 */}
           <Compass heading={location.heading ?? 0} />
         </>
       )

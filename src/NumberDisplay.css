@@ -1,0 +1,39 @@
+@font-face {
+    font-family: "Digital-7";
+    src: url("./Digital-7.ttf") format("truetype");
+}
+
+.number-display {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    background: #000;
+    /* 背景黑色 */
+    border-radius: 10px;
+    /* 圆角边框 */
+    padding: 20px;
+    width: fit-content;
+    box-shadow: 0 0 20px #00ff00;
+    /* 发光效果 */
+}
+
+.number {
+    font-family: "Digital-7", sans-serif;
+    font-size: 100px;
+    /* 字体大小 */
+    color: #00ff00;
+    /* 字体颜色为绿色 */
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+    /* 模拟发光效果 */
+}
+
+.unit {
+    font-family: "Digital-7", sans-serif;
+    font-size: 20px;
+    /* 单位字体大小 */
+    color: #00ff00;
+    /* 单位颜色 */
+    margin-left: 10px;
+    /* 单位与数字之间的间距 */
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
