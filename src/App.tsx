@@ -25,7 +25,6 @@ const App: React.FC = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
-  const [altitudeBaseline, setAltitudeBaseline] = useState<number | null>(null);
 
   useEffect(() => {
     let watchId: number;
