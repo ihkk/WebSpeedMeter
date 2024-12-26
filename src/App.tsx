@@ -33,29 +33,15 @@ const App: React.FC = () => {
       if ("geolocation" in navigator) {
         watchId = navigator.geolocation.watchPosition(
           (position) => {
-            console.log(position);
-
             const readableTimestamp = new Date(position.timestamp).toLocaleString();
-            const currentAltitude = position.coords.altitude;
-
-            if (altitudeBaseline === null && currentAltitude !== null && currentAltitude < 0) {
-              setAltitudeBaseline(-currentAltitude);
-            }
-
-            // calibrate altitude
-            const calibratedAltitude =
-              currentAltitude !== null && altitudeBaseline !== null
-                ? currentAltitude + altitudeBaseline
-                : currentAltitude;
-
             setLocation({
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
               accuracy: position.coords.accuracy,
-              altitude: calibratedAltitude,
+              altitude: position.coords.altitude,
               speed: position.coords.speed,
               heading: position.coords.heading,
-              timestamp: readableTimestamp, // 设置时间戳
+              timestamp: readableTimestamp,
             });
             setError(null);
           },
