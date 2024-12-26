@@ -14,11 +14,38 @@
         ],
         "headers": [
             {
-                "source": "**/*.@(ttf|woff|woff2|otf)",
+                "source": "**/*.ttf",
                 "headers": [
                     {
                         "key": "Content-Type",
                         "value": "font/ttf"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.woff",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "font/woff"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.woff2",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "font/woff2"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.otf",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "font/otf"
                     }
                 ]
             }
