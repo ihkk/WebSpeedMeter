@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Compass.css";
 
 interface CompassProps {
-    heading: number; // 当前目标角度（0-360）
+    heading: number; // target heading in degrees
 }
 
 const Compass: React.FC<CompassProps> = ({ heading }) => {
