@@ -79,11 +79,23 @@ const App: React.FC = () => {
     };
   }, []);
 
+  // Fullscreen function
+  const handleFullscreen = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error("Failed to enable fullscreen mode:", err.message);
+      });
+    }
+  };
 
 
   return (
     <div className="container mt-5 text-center">
-      <h1 className="mb-4 text-white">Web Speed Meter</h1>
+      <h1 className="mb-4 text-white" onClick={handleFullscreen} style={{ cursor: "pointer" }}>
+        Web Speed Meter
+      </h1>
       {error ? (
         <div className="alert alert-danger">{error}</div>
       ) : (
