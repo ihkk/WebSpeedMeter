@@ -1,0 +1,25 @@
+.double-display {
+    display: flex;
+    flex-direction: column;
+    /* 垂直布局 */
+    align-items: center;
+    /* 水平居中 */
+    justify-content: center;
+    /* 垂直居中 */
+    background: #000;
+    border-radius: 10px;
+    padding: 20px;
+    width: fit-content;
+    box-shadow: 0 0 20px #00ff00;
+}
+
+.double-display .top,
+.double-display .bottom {
+    font-family: "Digital-7", sans-serif;
+    font-size: 50px;
+    /* 字体大小 */
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+    margin: 5px 0;
+    /* 上下间距 */
+}

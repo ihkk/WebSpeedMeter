@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Compass from "./Compass";
 import NumberDisplay from "./NumberDisplay";
+import DoubleDisplay from "./DoubleDisplay";
 
 interface LocationState {
   latitude: number | null;
@@ -89,7 +90,7 @@ const App: React.FC = () => {
         <>
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Coordinates</h5>
+              {/* <h5 className="card-title">Coordinates</h5>
               <p className="card-text">
                 <strong>Latitude:</strong> {location.latitude ?? "N/A"} <br />
                 <strong>Longitude:</strong> {location.longitude ?? "N/A"} <br />
@@ -98,16 +99,43 @@ const App: React.FC = () => {
                 <strong>Speed:</strong> {location.speed !== null ? `${location.speed.toFixed(2)} m/s` : "N/A"} <br />
                 <strong>Heading:</strong> {location.heading ? `${location.heading.toFixed(2)}°` : "N/A"} <br />
                 <strong>Timestamp:</strong> {location.timestamp ?? "N/A"}
-              </p>
+              </p> */}
+
+              {/* 经纬度盒子 */}
+              <div className="d-flex justify-content-center my-4">
+                <DoubleDisplay
+                  top={location.latitude !== null ? location.latitude.toFixed(6) : "N/A"}
+                  bottom={location.longitude !== null ? location.longitude.toFixed(6) : "N/A"}
+                />
+              </div>
+
+              {/* 定位精度 */}
+              <div className="d-flex justify-content-center my-4">
+                <DoubleDisplay
+                  top="Accuracy" // 标题
+                  bottom={location.accuracy !== null ? `${location.accuracy.toFixed(0)} m` : "N/A"} // 精度值
+                />
+              </div>
+
+              {/* 显示速度的 NumberDisplay */}
+              <div className="d-flex justify-content-center my-4">
+                <NumberDisplay value={location.speed !== null ? (location.speed * 3.6).toFixed(0) : 0} unit="KM/H" fixedLength={3} />
+              </div>
+
+              {/* 显示时间 */}
+              <div className="d-flex justify-content-center my-4">
+                <DoubleDisplay
+                  top={location.timestamp ? location.timestamp.split(",")[0] : "N/A"} // 日期部分
+                  bottom={location.timestamp ? location.timestamp.split(",")[1]?.trim() : "N/A"} // 时间部分
+                />
+              </div>
+
+
+              {/* 显示指南针 */}
+              <Compass heading={location.heading ?? 0} />
             </div>
           </div>
-          {/* 显示速度的 NumberDisplay */}
-          <div className="d-flex justify-content-center my-4">
-            <NumberDisplay value={location.speed !== null ? (location.speed * 3.6).toFixed(0) : 0} unit="KM/H" fixedLength={3} />
-          </div>
 
-          {/* 显示指南针 */}
-          <Compass heading={location.heading ?? 0} />
         </>
       )
       }
