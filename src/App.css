@@ -29,3 +29,27 @@
   margin: 5px 0;
   /* 每行经纬度的间距 */
 }
+
+body {
+  background-color: #000;
+  /* 设置网页背景为纯黑色 */
+  color: #fff;
+  /* 全局文字颜色为白色 */
+}
+
+h1 {
+  color: #fff;
+  /* 标题颜色为白色 */
+}
+
+.container {
+  max-width: 600px;
+  /* 限制内容宽度，居中对齐 */
+  margin: 0 auto;
+  /* 居中 */
+}
+
+.card-body {
+  background: transparent;
+  /* 去除白色背景 */
+}
