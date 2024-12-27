@@ -88,35 +88,23 @@ const App: React.FC = () => {
         <div className="alert alert-danger">{error}</div>
       ) : (
         <>
-          <div className="row">
-            <div className="col-6 d-flex justify-content-center my-2">
-              <DoubleDisplay
-                top={location.latitude !== null ? location.latitude.toFixed(6) : "N/A"}
-                bottom={location.longitude !== null ? location.longitude.toFixed(6) : "N/A"}
-              />
-            </div>
-            <div className="col-6 d-flex justify-content-center my-2">
-              <DoubleDisplay
-                top="Accuracy"
-                bottom={location.accuracy !== null ? `${location.accuracy.toFixed(0)} m` : "N/A"}
-              />
-            </div>
+          <div className="grid-container">
+            <DoubleDisplay
+              top={location.latitude !== null ? location.latitude.toFixed(6) : "N/A"}
+              bottom={location.longitude !== null ? location.longitude.toFixed(6) : "N/A"}
+            />
+            <DoubleDisplay
+              top="Accuracy"
+              bottom={location.accuracy !== null ? `${location.accuracy.toFixed(0)} m` : "N/A"}
+            />
+            <NumberDisplay value={location.speed !== null ? (location.speed * 3.6).toFixed(0) : 0} unit="KM/H" fixedLength={3} />
+            <DoubleDisplay
+              top={location.timestamp ? location.timestamp.split(",")[0] : "N/A"}
+              bottom={location.timestamp ? location.timestamp.split(",")[1]?.trim() : "N/A"}
+            />
           </div>
-          <div className="row">
-            <div className="col-6 d-flex justify-content-center my-2">
-              <NumberDisplay value={location.speed !== null ? (location.speed * 3.6).toFixed(0) : 0} unit="KM/H" fixedLength={3} />
-            </div>
-            <div className="col-6 d-flex justify-content-center my-2">
-              <DoubleDisplay
-                top={location.timestamp ? location.timestamp.split(",")[0] : "N/A"}
-                bottom={location.timestamp ? location.timestamp.split(",")[1]?.trim() : "N/A"}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12 d-flex justify-content-center my-2">
-              <Compass heading={location.heading ?? 0} />
-            </div>
+          <div className="d-flex justify-content-center">
+            <Compass heading={location.heading ?? 0} />
           </div>
         </>
       )}

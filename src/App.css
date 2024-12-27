@@ -53,3 +53,42 @@ h1 {
   background: transparent;
   /* 去除白色背景 */
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  /* 自动适应列数，最小宽度 140px */
+  gap: 20px;
+  /* 格子间距 */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    /* 网页端固定 4 列 */
+  }
+}
+
+@media (max-width: 767px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    /* 移动端 2 列 */
+  }
+}
+
+h1 {
+  color: #fff;
+  font-size: clamp(24px, 5vw, 48px);
+  /* 动态调整标题大小 */
+  margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    margin-bottom: 10px;
+    /* 减少标题和格子间的间距 */
+  }
+}
