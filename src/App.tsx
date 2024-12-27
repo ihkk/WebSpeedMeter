@@ -28,9 +28,43 @@ const App: React.FC = () => {
   });
 
   const [error, setError] = useState<string | null>(null);
+  const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
 
   useEffect(() => {
     let watchId: number;
+
+
+    // start wake lock
+    const requestWakeLock = async () => {
+      try {
+        if ("wakeLock" in navigator) {
+          const lock = await navigator.wakeLock.request("screen");
+          setWakeLock(lock);
+
+          // handle wake lock state changes
+          lock.addEventListener("release", () => {
+            console.log("Wake Lock was released.");
+          });
+
+          console.log("Wake Lock is active.");
+        } else {
+          console.log("Wake Lock API is not supported in this browser.");
+        }
+      } catch (err) {
+        console.error("Failed to acquire Wake Lock:", err);
+      }
+    };
+
+    // release wake lock
+    const releaseWakeLock = async () => {
+      if (wakeLock !== null) {
+        await wakeLock.release();
+        setWakeLock(null);
+      }
+    };
+
+    // request wake lock
+    requestWakeLock();
 
     const startWatching = () => {
       if ("geolocation" in navigator) {
@@ -61,7 +95,7 @@ const App: React.FC = () => {
             });
           },
           {
-            enableHighAccuracy: true, // 高精度模式
+            enableHighAccuracy: true,
           }
         );
       } else {
@@ -71,11 +105,12 @@ const App: React.FC = () => {
 
     startWatching();
 
-    // 清除监听器，防止内存泄漏
+    // clear watch
     return () => {
       if (watchId) {
         navigator.geolocation.clearWatch(watchId);
       }
+      releaseWakeLock();
     };
   }, []);
 

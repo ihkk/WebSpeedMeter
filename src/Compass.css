@@ -74,37 +74,29 @@
     top: 0;
     left: 0;
     transform-origin: 50% 50%;
-    /* 以圆心为旋转中心 */
     transition: transform 0.4s ease-in-out;
-    /* 平滑旋转动画 */
 }
 
 .compass-pointer-red {
     position: absolute;
     top: 50%;
-    /* 红色指针从圆心开始向上 */
     left: 50%;
     width: 10px;
     height: 60px;
     background: red;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    /* 指向顶部 */
     transform: translate(-50%, -100%);
-    /* 定位顶部 */
     transition: transform 0.4s ease-in-out;
 }
 
 .compass-pointer-white {
     position: absolute;
     top: 50%;
-    /* 白色指针从圆心开始向下 */
     left: 50%;
     width: 10px;
     height: 60px;
     background: white;
     clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
-    /* 指向底部 */
     transform: translate(-50%, 0%);
-    /* 定位底部 */
     transition: transform 0.4s ease-in-out;
 }

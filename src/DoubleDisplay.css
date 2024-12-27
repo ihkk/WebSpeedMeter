@@ -7,26 +7,20 @@
     border-radius: 10px;
     padding: 20px;
     width: 90%;
-    /* 自适应宽度 */
     max-width: 250px;
-    /* 最大宽度 */
     height: 150px;
-    /* 默认高度 */
     box-shadow: 0 0 20px #00ff00;
 }
 
 @media (max-width: 767px) {
     .double-display {
         height: 100px;
-        /* 移动端高度调低 */
         padding: 10px;
-        /* 减少内边距 */
     }
 
     .double-display .top,
     .double-display .bottom {
         font-size: clamp(18px, 5vw, 40px);
-        /* 动态调整字体大小 */
     }
 }
 
@@ -34,11 +28,8 @@
 .double-display .bottom {
     font-family: "Digital-7", sans-serif;
     font-size: clamp(20px, 6vw, 50px);
-    /* 字体大小 */
     line-height: 1.2;
-    /* 设置行间距为 1.2 倍 */
     color: #00ff00;
     text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
     margin: 0;
-    /* 去除默认外边距 */
 }

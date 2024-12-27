@@ -2,8 +2,8 @@ import React from "react";
 import "./DoubleDisplay.css";
 
 interface DoubleDisplayProps {
-    top: string; // 上层内容
-    bottom: string; // 下层内容
+    top: string;
+    bottom: string;
 }
 
 const DoubleDisplay: React.FC<DoubleDisplayProps> = ({ top, bottom }) => {
